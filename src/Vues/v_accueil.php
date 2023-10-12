@@ -43,6 +43,17 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
+                        <?php if($isComptable) { ?>
+                        <a href="index.php?uc=validerfrais&action=validerfrais"
+                           class="btn btn-success btn-lg" role="button">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <br>Valider les fiches de frais</a>
+                        <a href="index.php?uc=suivipaiement&action=suivipaiement"
+                           class="btn btn-primary btn-lg" role="button">
+                            <span class="glyphicon glyphicon-euro"></span>
+                            <br>Suivre le paiment des fiches de frais</a>
+                       
+                        <?php }else { ?>
                         <a href="index.php?uc=gererFrais&action=saisirFrais"
                            class="btn btn-success btn-lg" role="button">
                             <span class="glyphicon glyphicon-pencil"></span>
@@ -51,6 +62,7 @@
                            class="btn btn-primary btn-lg" role="button">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <br>Afficher mes fiches de frais</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
