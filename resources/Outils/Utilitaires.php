@@ -161,14 +161,18 @@ abstract class Utilitaires
     {
         $tabDate = explode('/', $date);
         $dateOK = true;
-        if (count($tabDate) != 3) {
+        if ($date > date("m-d-y")) {
             $dateOK = false;
         } else {
-            if (!self::estTableauEntiers($tabDate)) {
+            if (count($tabDate) != 3) {
                 $dateOK = false;
             } else {
-                if (!checkdate(intval($tabDate[1]), intval($tabDate[0]), intval($tabDate[2]))) {
+                if (!self::estTableauEntiers($tabDate)) {
                     $dateOK = false;
+                } else {
+                    if (!checkdate(intval($tabDate[1]), intval($tabDate[0]), intval($tabDate[2]))) {
+                        $dateOK = false;
+                    }
                 }
             }
         }

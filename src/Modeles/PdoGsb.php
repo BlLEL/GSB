@@ -483,4 +483,15 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
+    public function estComptable($idVisiteur) :bool{
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT visiteur.iscomptable FROM visiteur '
+            . 'WHERE visiteur.id = :unIdVisiteur '
+        );
+        $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $estcomptable = $requetePrepare->fetch();
+        return $estcomptable[0];
+    }
 }

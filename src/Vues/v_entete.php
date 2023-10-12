@@ -52,6 +52,13 @@
                                     Accueil
                                 </a>
                             </li>
+                            <?php 
+                            $isComptable = $pdo->estComptable($_SESSION['idVisiteur']);
+                            if (!$isComptable){
+                                
+                            
+                            ?>
+                            
                             <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
                                 <a href="index.php?uc=gererFrais&action=saisirFrais">
                                     <span class="glyphicon glyphicon-pencil"></span>
@@ -64,6 +71,21 @@
                                     Afficher mes fiches de frais
                                 </a>
                             </li>
+                            <?php } else {
+                            ?>
+                             <li <?php if ($uc == 'suivipaiement') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=suivipaiement&action=suivipaiement" style="color:#df6900;">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    Suivre le paiement des fiches de frais
+                                </a>
+                            </li>
+                             <li <?php if ($uc == 'validerfrais') { ?>class="active"<?php } ?>>
+                                <a href="index.php?uc=validerfrais&action=validerfrais" style="color:#df6900;">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    Valider les fiches de frais
+                                </a>
+                            </li>
+                            <?php } ?>
                             <li 
                             <?php if ($uc == 'deconnexion') { ?>class="active"<?php } ?>>
                                 <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
