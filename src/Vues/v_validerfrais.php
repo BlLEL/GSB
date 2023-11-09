@@ -27,18 +27,23 @@
         <form action="index.php?uc=etatFrais&action=voirEtatFrais" 
               method="post" role="form">
             <div class="form-group">
-                <label for="lstMois" accesskey="n">Choisir le visiteur : </label>
+                <label for="lstMois" accesskey="n">Choisir le Visiteur : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
                     <?php
-                    foreach ($visiteur as $idVisiteur) {
-                        
-                        if ($visiteur == $VisiteurASelectionner) {
+                    foreach ($lesVisiteurs as $unVisiteur) {
+                        $id = $unVisiteur['id'];
+                        $nom = $unVisiteur['nom'];
+                        $prenom = $unVisiteur['prenom'];
+                        if ($id == $visiteursASelectionner) {
                             ?>
-                            <option selected value="<?php echo $visiteur ?>">
-                                <?php echo $nomvisiteur . $prenomvisiteur ?> </option>
+                            <option selected value="<?php echo $id ?>">
+                                <?php echo $nom . ' ' . $prenom ?> </option>
                             <?php
                         } else {
-                            
+                            ?>
+                            <option value="<?php echo $id ?>">
+                                <?php echo $nom . ' ' . $prenom ?> </option>
+                            <?php
                         }
                     }
                     ?>    
@@ -46,14 +51,15 @@
                 </select>
             </div>
 
+
             <div class="form-group">
                 <label for="lstMois" accesskey="n">Mois : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
                     <?php
                     foreach ($lesMois as $unMois) {
-                        $mois = $unMois['mois'];
-                        $numAnnee = $unMois['numAnnee'];
-                        $numMois = $unMois['numMois'];
+                        $id = $unMois['mois'];
+                        $prenom = $unMois['numAnnee'];
+                        $nom = $unMois['numMois'];
                         if ($mois == $moisASelectionner) {
                             ?>
                             <option selected value="<?php echo $mois ?>">
@@ -76,7 +82,49 @@
     </div>
     
 </div>
-
+    <h2>Valider la fiche de frais</h2>
+<h3>Eléments forfaitisés</h3>
+    <div class="col-md-4">
+        <form method="post" 
+              role="form">
+            <fieldset>       
+                                    <div class="form-group">
+                        <label for="idFrais">Forfait Etape</label>
+                        <input type="text" id="idFrais" 
+                               name="lesFrais[ETP]"
+                               size="10" maxlength="5" 
+                               value="0" 
+                               class="form-control">
+                    </div>
+                                        <div class="form-group">
+                        <label for="idFrais">Frais Kilométrique</label>
+                        <input type="text" id="idFrais" 
+                               name="lesFrais[KM]"
+                               size="10" maxlength="5" 
+                               value="0" 
+                               class="form-control">
+                    </div>
+                                        <div class="form-group">
+                        <label for="idFrais">Nuitée Hôtel</label>
+                        <input type="text" id="idFrais" 
+                               name="lesFrais[NUI]"
+                               size="10" maxlength="5" 
+                               value="0" 
+                               class="form-control">
+                    </div>
+                                        <div class="form-group">
+                        <label for="idFrais">Repas Restaurant</label>
+                        <input type="text" id="idFrais" 
+                               name="lesFrais[REP]"
+                               size="10" maxlength="5" 
+                               value="0" 
+                               class="form-control">
+                    </div>
+                                    <button class="btn btn-success" type="submit">Corriger</button>
+                <button class="btn btn-danger" type="reset">Réinitialiser</button>
+            </fieldset>
+        </form>
+    </div>
 <div class="panel panel-info">
         <div class="panel-heading">Descriptif des éléments hors forfait</div>
         <table class="table table-bordered table-responsive">

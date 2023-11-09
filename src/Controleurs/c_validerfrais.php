@@ -54,10 +54,20 @@ switch ($action) {
         $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $pdo->supprimerFraisHorsForfait($idFrais);
         break;
+    case 'validerfrais':
+        $lesVisiteurs = $pdo->getListeVisiteur();
+        // Afin de sélectionner par défaut le dernier mois dans la zone de liste
+        // on demande toutes les clés, et on prend la première,
+        // les mois étant triés décroissants
+        $lesCles = array_keys($lesVisiteurs);
+        $visiteursASelectionner = $lesCles[0];
+
+        include PATH_VIEWS . 'v_validerfrais.php';
+        break;
+
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 //require PATH_VIEWS . 'v_listeFraisForfait.php';
 //require PATH_VIEWS . 'v_listeFraisHorsForfait.php';
-include PATH_VIEWS . 'v_validerfrais.php';
 

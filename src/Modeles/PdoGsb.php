@@ -494,4 +494,27 @@ class PdoGsb
         $estcomptable = $requetePrepare->fetch();
         return $estcomptable[0];
     }
+    
+   public function getListeVisiteur(): array
+    {
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT visiteur.id AS id, visiteur.nom AS nom, visiteur.prenom AS prenom FROM visiteur '
+            . 'ORDER BY ID asc '
+        );
+        $requetePrepare->execute();
+        $lesVisiteurs = array();
+        while ($laLigne = $requetePrepare->fetch()) {
+            $id = $laLigne['id'];
+            $nom = $laLigne['nom'];
+            $prenom = $laLigne['prenom'];
+            $lesVisiteurs[] = array(
+                'id' => $id,
+                'nom' => $nom,
+                'prenom' => $prenom
+            );
+        }
+        return $lesVisiteurs;
+    }
+
+
 }
