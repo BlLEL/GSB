@@ -9,6 +9,8 @@
  * @package   GSB
  * @author    Cheri Bibi - Réseau CERTA <contact@reseaucerta.org>
  * @author    José GIL - CNED <jgil@ac-nice.fr>
+ * @author    Bilel TOUATI
+ * @author    Egor GUTUTUI
  * @copyright 2017 Réseau CERTA
  * @license   Réseau CERTA
  * @version   GIT: <0>
@@ -206,6 +208,14 @@ class PdoGsb
         return $requetePrepare->fetchAll();
     }
 
+    public function getLesValeursFrais(): array{
+        $requetePrepare = $this->connexion->prepare(
+                'SELECT fraisforfait.montant as montant, fraisforfait.id as idfrais '
+                . 'FROM fraisforfait'
+        );
+        $requetePrepare->execute();
+        return $requetePrepare->fetchAll();
+    }
     /**
      * Met à jour la table ligneFraisForfait
      * Met à jour la table ligneFraisForfait pour un visiteur et
@@ -499,6 +509,7 @@ class PdoGsb
     {
         $requetePrepare = $this->connexion->prepare(
             'SELECT visiteur.id AS id, visiteur.nom AS nom, visiteur.prenom AS prenom FROM visiteur '
+            . 'WHERE iscomptable = false '    
             . 'ORDER BY ID asc '
         );
         $requetePrepare->execute();
@@ -515,6 +526,114 @@ class PdoGsb
         }
         return $lesVisiteurs;
     }
+    
+   /**
+     * Retourne la liste des visiteurs
+     * @return l'id, le nom et le prénom sous la forme d'un tableau associatif
+     */
+    public function getVisiteurs(): array
+    {
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT visiteur.id AS id, visiteur.nom AS nom, '
+            . 'visiteur.prenom AS prenom '
+            . 'FROM visiteur '
+            . 'Where iscomptable = False'
+        );
+        $requetePrepare->execute();
+        $response = $requetePrepare->fetchAll();
+        return $response;
 
-
+    }
+    
+    /**
+     * Retourne la liste des fiches frais a valider
+     * @return uun tableau assossiatif des fiches de frais à valider
+     */
+    public function getFichesFraisAValider(): array|bool
+    {
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT fichefrais.idvisiteur AS idvisiteur, fichefrais.mois AS mois, '
+            . 'fichefrais.nbjustificatifs AS nbjusti, '
+            . 'fichefrais.montantvalide AS montantvalide, '
+            . 'fichefrais.datemodif AS datemodif FROM fichefrais'
+        );
+        $requetePrepare->execute();
+        $lesFiches = array();
+        while ($laLigne = $requetePrepare->fetch()) {
+            $mois = $laLigne['mois'];
+            $numMois = substr($mois, 4, 2);
+            $lesFiches[] = array(
+                'idvisiteur' => $laLigne['idvisiteur'],
+                'mois' => $numMois,
+                'nbjustificatifs' => $laLigne['nbjusti'],
+                'montantvalide' => $laLigne['montantvalide'],
+                'datemodif' => $laLigne['datemodif']
+            );
+        }
+        return $lesFiches;
+    }
+    
+    /*
+     * Retourne le montant valide de la fiche de frais associé à un visiteur et un mois
+     * @return le montant
+     */
+    public function getMontantValide($idVisiteur, $mois): ?string {
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT montantvalide '
+            . 'FROM fichefrais '
+            . 'Where mois = :mois AND '
+            . 'idvisiteur = :idVisiteur AND '
+            . 'idetat = "VA"'
+        );
+        $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':mois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $response = $requetePrepare->fetch();
+        if($response){
+            return $response[0];
+        }else{
+            return null;
+        }    
+    } 
+    
+    /**
+     * Rend la somme des montant non refusées des frais hors forfait
+     * @param type $idVisiteur
+     * @param type $mois
+     * @return int|null
+     */
+    public function getSommeMontantFraisHorsForfait($idVisiteur, $mois) : ?int{
+       $requetePrepare = $this->connexion->prepare(
+            'SELECT SUM(montant) '
+            . 'FROM lignefraishorsforfait '
+            . 'Where mois = :mois AND '
+            . 'idvisiteur = :idVisiteur AND '
+            . 'refuse = False'
+        );
+        $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':mois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $response = $requetePrepare->fetch();
+        if($response){
+            return $response[0];
+        }else{
+            return null;
+        }
+    }
+    
+    public function getNomVisiteur($idVisiteur): array{
+        $requetePrepare = $this->connexion->prepare(
+            'SELECT nom, prenom '
+            . 'FROM visiteur '
+            . 'Where id = :idVisiteur '
+        );
+        $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $response = $requetePrepare->fetch();
+        if($response){
+            return $response;
+        }else{
+            return null;
+        }
+    }
 }

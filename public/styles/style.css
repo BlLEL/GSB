@@ -40,3 +40,9 @@ code {
 .comptable :hover{
     background: #df6900;
 }
+
+.form-group2 {
+    width: 175px;
+    display: inline-block;
+}
+

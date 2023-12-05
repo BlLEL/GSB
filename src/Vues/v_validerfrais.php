@@ -18,7 +18,7 @@
 
 ?>
         <link href="./styles/bootstrap/bootstrap-comptable.css" rel="stylesheet" type="text/css"/>
-
+        
 <hr>
 
 <div class="row">
@@ -26,8 +26,8 @@
     <div class="col-md-4">
         <form action="index.php?uc=etatFrais&action=voirEtatFrais" 
               method="post" role="form">
-            <div class="form-group">
-                <label for="lstMois" accesskey="n">Choisir le Visiteur : </label>
+            <div class="form-group2">
+                <label for="lstMoiss" accesskey="n">Choisir le Visiteur : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
                     <?php
                     foreach ($lesVisiteurs as $unVisiteur) {
@@ -52,14 +52,16 @@
             </div>
 
 
-            <div class="form-group">
-                <label for="lstMois" accesskey="n">Mois : </label>
+            <div class="form-group2">
+                <label for="lstMoiss" accesskey="n">Mois : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
                     <?php
+                    
+
                     foreach ($lesMois as $unMois) {
-                        $id = $unMois['mois'];
-                        $prenom = $unMois['numAnnee'];
-                        $nom = $unMois['numMois'];
+                        $mois = $unMois['mois'];
+                        $numMois = $unMois['numMois'];
+                        $numAnnee = $unMois['numAnnee'];
                         if ($mois == $moisASelectionner) {
                             ?>
                             <option selected value="<?php echo $mois ?>">
@@ -76,7 +78,8 @@
 
                 </select>
             </div>
-           
+           <input id="ok" type="submit" value="Valider" class="btn btn-success" 
+                   role="button">
         </form>
         
     </div>
@@ -93,7 +96,7 @@
                         <input type="text" id="idFrais" 
                                name="lesFrais[ETP]"
                                size="10" maxlength="5" 
-                               value="0" 
+                               value="<?php $fichefrais ?>" 
                                class="form-control">
                     </div>
                                         <div class="form-group">
@@ -101,7 +104,7 @@
                         <input type="text" id="idFrais" 
                                name="lesFrais[KM]"
                                size="10" maxlength="5" 
-                               value="0" 
+                               value="<?php $infogetvisiteur ?>"  
                                class="form-control">
                     </div>
                                         <div class="form-group">
@@ -109,7 +112,7 @@
                         <input type="text" id="idFrais" 
                                name="lesFrais[NUI]"
                                size="10" maxlength="5" 
-                               value="0" 
+                               value="<?php $infogetvisiteur ?>"  
                                class="form-control">
                     </div>
                                         <div class="form-group">
@@ -117,10 +120,10 @@
                         <input type="text" id="idFrais" 
                                name="lesFrais[REP]"
                                size="10" maxlength="5" 
-                               value="0" 
+                               value="<?php $infogetvisiteur ?>"  
                                class="form-control">
                     </div>
-                                    <button class="btn btn-success" type="submit">Corriger</button>
+                 <button class="btn btn-success" type="submit">Corriger</button>
                 <button class="btn btn-danger" type="reset">Réinitialiser</button>
             </fieldset>
         </form>
@@ -138,7 +141,7 @@
             </thead>  
             <tbody>
             <?php
-            foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            foreach ($lesFrais as $unFraisHorsForfait){
                 $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
                 $date = $unFraisHorsForfait['date'];
                 $montant = $unFraisHorsForfait['montant'];
