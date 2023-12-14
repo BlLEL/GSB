@@ -74,4 +74,5 @@
         }
         ?>
     </table>
-</div>
+</div>   
+<button class="btn btn-link" type="link">Télécharger le PDF</button>

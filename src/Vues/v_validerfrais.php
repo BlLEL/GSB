@@ -26,7 +26,7 @@
     <div class="col-md-4">
         <form action="index.php?uc=validerfrais&action=afficheFrais" 
               method="post" role="form">
-            <div class="form-group">
+            <div class="choix">
                 <label for="leVisiteur" accesskey="n">Choisir le Visiteur : </label>
                 <select id="leVisiteur" name="leVisiteur" class="form-control">
                     <option value="none">Choisir...</option>
@@ -46,7 +46,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="choix">
                 <label for="leMois" accesskey="n">Mois : </label>
                 <select id="leMois" name="leMois" class="form-control">
                     <option value="none">Choisir...</option>
@@ -66,7 +66,7 @@
                 </select>
             </div>
             
-            <input id="ok" type="submit" value="Valider" class="btn btn-success" 
+            <input id="ok" type="submit" value="Valider" class="btn btn-success2" 
                    role="button">
         </form>
     </div>

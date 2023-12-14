@@ -28,7 +28,7 @@
     <div class="col-md-4">
         <form action="index.php?uc=suivipaiement&action=afficheTableauFrais" 
               method="post" role="form">
-            <div class="form-group">
+            <div class="choix">
                 <label for="leVisiteur" accesskey="n">Choisir le Visiteur : </label>
                 <select id="leVisiteur" name="leVisiteur" class="form-control">
                     <option value="none">Choisir...</option>
@@ -48,7 +48,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="choix">
                 <label for="leMois" accesskey="n">Mois : </label>
                 <select id="leMois" name="leMois" class="form-control">
                     <option value="none">Choisir...</option>
@@ -71,6 +71,8 @@
             <input id="ok" type="submit" value="Valider" class="btn btn-success" 
                    role="button">
             <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" 
+                   role="button">
+            <input id="idpaiement" type="submit" value="Mettre en Paiement" class="btn btn-primary" 
                    role="button">
         </form>
     </div>

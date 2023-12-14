@@ -25,6 +25,7 @@
                     <td>
                         <button class="btn btn-success" type="submit">Corriger</button>
                         <button class="btn btn-danger" type="reset">Réinitialiser</button>
+                        <button class="btn btn-warning" type="warning">Refusé</button>
                     </td>
                 </tr>
                 <?php
@@ -36,7 +37,7 @@
     <form method="post" 
               action="index.php?uc=validerfrais&action=majNbJustificatifs" 
               role="form">
-    <div class="form-group">
+    <div class="choix">
                         <label for="nbJustificatifs">Nombre de justificatifs : </label>
                         <input type="text" id="nbJustificatifs" 
                                name="nbJustificatif"

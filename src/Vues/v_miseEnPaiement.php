@@ -1,3 +1,3 @@
 <div class="alert alert-success" role="alert">
-    <p>Fiches frais mises en paiement !</p>
+    <p>La fiche de frais a bien été mise en paiement !</p>
 </div>

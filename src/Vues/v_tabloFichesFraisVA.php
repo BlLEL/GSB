@@ -20,7 +20,7 @@
                 <input type="hidden" name="idVisiteur" value="<?php echo $leVisiteur ?>">
                 <input type="hidden" name="mois" value="<?php echo $leMois; ?>">
                 
-                <input id="ok" type="submit" value="Mettre en Paiement" class="btn btn-success" 
+                <input id="ok" type="checkbox" value="Mettre en Paiement" class="btn btn-success" 
                    role="button">
                 </form>
             </th>
