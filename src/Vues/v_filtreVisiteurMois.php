@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label for="leVisiteur" accesskey="n">Choisir le Visiteur : </label>
                 <select id="leVisiteur" name="leVisiteur" class="form-control">
-                    
+                    <option value="none">Choisir...</option>
                     <?php
                     foreach ($lesVisiteurs as $unVisiteur) {
                         $id = $unVisiteur['id'];
@@ -42,7 +42,7 @@
                                 <?php echo $nom . ' ' . $prenom ?> </option>
                             <?php
                     }
-                    ?> 
+                    ?>    
 
                 </select>
             </div>
@@ -51,7 +51,8 @@
             <div class="form-group">
                 <label for="leMois" accesskey="n">Mois : </label>
                 <select id="leMois" name="leMois" class="form-control">
-                    <?php
+                    <option value="none">Choisir...</option>
+                        <?php
                     $lesMois = $pdo->getLesMoisDisponibles($id);
                     foreach ($lesMois as $unMois) {
                         $mois = $unMois['mois'];
@@ -62,7 +63,7 @@
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>
                             <?php
                         }
-                    ?>     
+                    ?>    
 
                 </select>
             </div>

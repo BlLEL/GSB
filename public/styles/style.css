@@ -34,15 +34,19 @@ code {
 }
 
 .comptable {
-    color : #df6900;
+    color : #ff8507;
 }
 
 .comptable :hover{
-    background: #df6900;
+    background: #ff8507;
 }
 
-.form-group2 {
+.form-group {
     width: 175px;
     display: inline-block;
 }
 
+.elementforfait{
+    width: 144px;
+    margin-bottom: 17px;
+}
