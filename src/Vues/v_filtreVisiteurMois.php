@@ -74,17 +74,44 @@
                    role="button">
             <input id="idpaiement" type="submit" value="Mettre en Paiement" class="btn btn-primary" 
                    role="button">
-        <button type="button" onclick="selectAllCheckboxes()">Tout sélectionner</button>
-        <script>
-            function selectAllCheckboxes() {
-                // Récupérer toutes les cases à cocher dans le formulaire
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                
-                // Parcourir toutes les cases à cocher et les cocher
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.checked = true;
-                });
-            }
+           <button id="selectAllButton" type="button" onclick="selectAllCheckboxes()">Sélectionner tout</button>
+        <button id="deselectAllButton" type="button" class="hide" onclick="deselectAllCheckboxes()">Désélectionner tout</button>
+  <script>
+            function toggleButtons() {
+            // Récupérer les boutons
+            var selectButton = document.getElementById('selectAllButton');
+            var deselectButton = document.getElementById('deselectAllButton');
+
+            // Inverser la visibilité des boutons
+            selectButton.classList.toggle('hide');
+            deselectButton.classList.toggle('hide');
+        }
+
+        function selectAllCheckboxes() {
+            // Récupérer toutes les cases à cocher dans le formulaire
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Parcourir toutes les cases à cocher et les cocher
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+            });
+
+            // Appeler la fonction pour basculer les boutons
+            toggleButtons();
+        }
+
+        function deselectAllCheckboxes() {
+            // Récupérer toutes les cases à cocher dans le formulaire
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Parcourir toutes les cases à cocher et les désélectionner
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+
+            // Appeler la fonction pour basculer les boutons
+            toggleButtons();
+        }
         </script>
         </form>
         
