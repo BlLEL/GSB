@@ -640,5 +640,4 @@ class PdoGsb {
         $requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
     }
-    
 }

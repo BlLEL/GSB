@@ -72,10 +72,10 @@
                    role="button">
             <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" 
                    role="button">
-            
-           <button type="button" class="btn btn-primary" onclick="mettreEnPaiement()">Mettre en paiement</button>
-            <button id="selectAllButton" type="button" onclick="selectAllCheckboxes()">Sélectionner tout</button>
-        <button id="deselectAllButton" type="button" class="hide" onclick="deselectAllCheckboxes()">Désélectionner tout</button>
+            <a></a>
+            <button type="button" class="btn btn-primary" href="index.php?uc=suivipaiement&action=miseEnPaiement" onclick="mettreEnPaiement()">Mettre en paiement</button>
+            <button id="selectAllButton" type="button" onclick="selectAllCheckboxes()">Tout sélectionner</button>
+        <button id="deselectAllButton" type="button" class="hide" onclick="deselectAllCheckboxes()">Tout déselectionner</button>
   <script>
             function toggleButtons() {
             // Récupérer les boutons
@@ -124,9 +124,9 @@
 
             // Afficher un message ou rediriger en conséquence
             if (auMoinsUneCochee) {
+                window.location.href = 'index.php?uc=suivipaiement&action=miseEnPaiement';
                 // Afficher un message sur la même page (vous pouvez personnaliser cela)
                 alert('Tout est bon. La mise en paiement peut être effectuée.');
-                
                 // Rediriger vers une nouvelle page (décommenter la ligne suivante)
             } else {
                 alert('Veuillez cocher au moins une case avant de mettre en paiement.');
