@@ -74,6 +74,19 @@
                    role="button">
             <input id="idpaiement" type="submit" value="Mettre en Paiement" class="btn btn-primary" 
                    role="button">
+        <button type="button" onclick="selectAllCheckboxes()">Tout sélectionner</button>
+        <script>
+            function selectAllCheckboxes() {
+                // Récupérer toutes les cases à cocher dans le formulaire
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                
+                // Parcourir toutes les cases à cocher et les cocher
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = true;
+                });
+            }
+        </script>
         </form>
+        
     </div>
 </div>

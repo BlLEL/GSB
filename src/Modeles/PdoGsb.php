@@ -624,4 +624,5 @@ class PdoGsb {
         $requetePrepare->bindParam(':mois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
 }
