@@ -258,40 +258,41 @@ abstract class Utilitaires {
     $pdf->SetY(30); 
     $pdf->Ln();
     $pdf->Cell(0, 10, 'Date de création: ' . date('Y-m-d H:i:s'), 0, 1);
-    $pdf->Cell(0, 10, 'Nom: ' . $dataPdf['nom'], 0, 1);
-    $pdf->Cell(0, 10, 'Prenom: ' . $dataPdf['prenom'], 0, 1);
-    $pdf->Cell(0, 10, 'Num Annee: ' . $dataPdf['numAnnee'], 0, 1);
-    $pdf->Cell(0, 10, 'Num Mois: ' . $dataPdf['numMois'], 0, 1);
+    $pdf->MultiCell(0, 10, 'Visiteur: ' . $dataPdf['nom'] . " " . $dataPdf['prenom'], 0, 1);
+    $pdf->MultiCell(0, 10, 'Mois: ' . $dataPdf['numMois'] . "/" . $dataPdf['numAnnee'], 0, 1);
     $pdf->Cell(0, 10, 'TOTAL : ' . $dataPdf['montantValide'].'€', 0, 1);
 
     // Tableau pour les frais forfait
-    $pdf->Cell(0, 10, 'Frais Forfait:', 'B', 1, 'L');
     $html = '<table border="1">
                 <tr>
-                    <th>Type</th>
+                    <th>Frais forfaitaire</th>
                     <th>Quantité</th>
+                    <th>Montant unitaire</th>
+                    <th>Total</th>
                 </tr>';
     foreach ($dataPdf['fraisForfait'] as $frais) {
         $html .= '<tr>
                     <td>' . $frais['libelle'] . '</td>
                     <td>' . $frais['quantite'] . '</td>
+                    <td>' . $frais['montantValide'] . '</td>
+                    <td>' . $frais['quantite']*$frais['montantvalide'] . '</td>
                   </tr>';
     }
     $html .= '</table>';
     $pdf->writeHTML($html);
 
     // Tableau pour les frais hors forfait
-    $pdf->Cell(0, 10, 'Frais Hors Forfait:', 'B', 1, 'L');
+    $pdf->Cell(0, 10, 'Autre frais:', 'B', 1, 'L');
     $html = '<table border="1">
                 <tr>
-                    <th>Libellé</th>
                     <th>Date</th>
+                    <th>Libellé</th>
                     <th>Montant</th>
                 </tr>';
     foreach ($dataPdf['fraisHF'] as $fraisHF) {
         $html .= '<tr>
-                    <td>' . htmlspecialchars($fraisHF['libelle']) . '</td>
                     <td>' . $fraisHF['date'] . '</td>
+                    <td>' . htmlspecialchars($fraisHF['libelle']) . '</td>
                     <td>' . $fraisHF['montant'] . '</td>
                   </tr>';
     }
@@ -299,6 +300,6 @@ abstract class Utilitaires {
     $pdf->writeHTML($html);
 
     ob_end_clean();
-    $pdf->Output('output.pdf', 'D');
+    $pdf->Output('fichedefrais.pdf', 'D');
 }
 }
