@@ -613,19 +613,29 @@ class PdoGsb {
      * @param type $idVisiteur
      * @param type $mois
      */
-    public function ligneFraisHorsForfaitRefuse($idVisiteur, $mois) {
+    public function ligneFraisHorsForfaitRefuse($id) {
         $requetePrepare = $this->connexion->prepare(
-                'UPDATE lignehorsforfait '
+                'UPDATE lignefraishorsforfait '
                 . 'SET refuse = True '
-                . 'WHERE idvisiteur = :idVisiteur AND '
-                . 'mois = :mois'
+                . 'WHERE id = :id'
         );
-        $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':mois', $mois, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
     }
-    
-       public function majFraisHF($date, $libelle, $montant, $id) {
+
+    /**
+     * Met à jour la table ligneFraisHorsForfait
+     * Met à jour la table ligneFraisHorsForfait pour un visiteur et
+     * un mois donné en enregistrant les nouveaux montants
+     * 
+     * @param type $idVisiteur
+     * @param type $mois
+     * @param type $date
+     * @param type $libelle
+     * @param type $montant
+     * @param type $id
+     */
+    public function majFraisHF($date, $libelle, $montant, $id) {
         $requetePrepare = $this->connexion->prepare(
                 'UPDATE lignefraishorsforfait '
                 . 'SET lignefraishorsforfait.date = :date, '

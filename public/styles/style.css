@@ -67,3 +67,34 @@ h1{
     color: #ff8507;
 }
 
+.refuse {
+    background-color: coral;
+}
+
+.transparent-button {
+            background-color: transparent;
+            border: none;
+            padding: 10px 20px; /* Ajuster selon les besoins */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        /* Définir le style du texte à l'intérieur du bouton */
+        .transparent-button span {
+            color: #ffffff; /* Couleur du texte */
+            display: block;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Ajouter un effet de survol pour le texte */
+        .transparent-button:hover span {
+            transform: translateY(-100%);
+        }
+
+        .refuse {
+            background-color: coral; 
+        }

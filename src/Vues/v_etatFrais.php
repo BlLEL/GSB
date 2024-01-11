@@ -74,5 +74,8 @@
         }
         ?>
     </table>
-</div>   
-<button class="btn btn-link" type="link">Télécharger le PDF</button>
+</div>
+<form action="index.php?uc=etatFrais&action=downloadPdf" method="post" role="form">
+    <input type="hidden" name="mois" value="<?php echo $numAnnee.$numMois ?>">    
+    <button type="submit">Télécharger en PDF</button>
+</form>
