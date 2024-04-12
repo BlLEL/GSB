@@ -274,8 +274,8 @@ abstract class Utilitaires {
         $html .= '<tr>
                     <td>' . $frais['libelle'] . '</td>
                     <td>' . $frais['quantite'] . '</td>
-                    <td>' . $frais['montantValide'] . '</td>
-                    <td>' . $frais['quantite']*$frais['montantvalide'] . '</td>
+                    <td>' . $frais['montant'] . '</td>
+                    <td>' . $frais['quantite']*$frais['montant'] . '</td>
                   </tr>';
     }
     $html .= '</table>';

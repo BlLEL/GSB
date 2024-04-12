@@ -11,13 +11,13 @@
             <th>Mettre en paiement</th>
         </tr>
         <tr>
+            <th><?php echo $montantFF?>€</th>
+            <th><?php echo $montantHF?>€</th>
             <th><?php echo $montantValide?>€</th>
-            <th><?php echo $montantHorsForfait?>€</th>
-            <th><?php echo $total?>€</th>
             <th>
                 <form action="index.php?uc=suivipaiement&action=miseEnPaiement" method="post" role="form">  
                     <!-- données envoyées cachées -->
-                <input type="hidden" name="idVisiteur" value="<?php echo $leVisiteur ?>">
+                <input type="hidden" name="idVisiteur" value="<?php echo $leVisiteurId ?>">
                 <input type="hidden" name="mois" value="<?php echo $leMois; ?>">
                 
                 <input id="ok" type="checkbox" value="Mettre en Paiement" class="btn btn-success" 
